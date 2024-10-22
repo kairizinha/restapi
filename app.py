@@ -10,11 +10,9 @@ def obter_dados():
     response = requests.get(url)
 
     if response.status_code == 200:
-        # Processar o conteúdo XML
         xml_data = response.content
         root = ET.fromstring(xml_data)
 
-        # Extrair informações específicas
         note_data = {
             'to': root.find('to').text,
             'from': root.find('from').text,
@@ -27,4 +25,4 @@ def obter_dados():
         return jsonify({'error': 'Falha ao obter dados'}), response.status_code
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=True, host='0.0.0.0')  # Isso permitirá o acesso de outras máquinas
